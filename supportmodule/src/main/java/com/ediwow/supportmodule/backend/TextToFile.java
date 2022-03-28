@@ -9,10 +9,11 @@ import java.io.PrintStream;
 import java.util.Date;
 
 public class TextToFile {
-    public static void print(String fileName, String output) {
+    private static final String VERBOSE = "verbose", ERROR = "error";
+    public static void print(String folderName, String fileName, String output) {
         if (!Meta.isProduction) {
             try {
-                File file = new File(createDir("verbose"), fileName + DateTimeManager.ToFormat.toStraightTimestamp(new Date()) + ".txt");
+                File file = new File(createDir(folderName, VERBOSE), fileName + DateTimeManager.ToFormat.toStraightTimestamp(new Date()) + ".txt");
                 PrintStream ps = new PrintStream(file);
                 ps.print(output);
                 ps.flush();
@@ -23,12 +24,12 @@ public class TextToFile {
         }
     }
 
-    private static void print(Class<?> sourceClass, String output) {
+    private static void print(String folderName, Class<?> sourceClass, String output) {
         if (!Meta.isProduction) {
             try {
                 if (sourceClass.getEnclosingMethod() != null) {
                     String fileName = String.format("%s.%s-%s.txt", sourceClass.getName(), sourceClass.getEnclosingMethod().getName(), DateTimeManager.ToFormat.toStraightTimestamp(new Date()));
-                    File file = new File(createDir("verbose"), fileName);
+                    File file = new File(createDir(folderName, VERBOSE), fileName);
                     PrintStream ps = new PrintStream(file);
                     ps.print(output);
                     ps.flush();
@@ -40,11 +41,11 @@ public class TextToFile {
         }
     }
 
-    private static void print(Class<?> sourceClass, Exception eOutput) {
+    private static void print(String folderName, Class<?> sourceClass, Exception eOutput) {
         try {
             if (sourceClass.getEnclosingMethod() != null) {
                 String fileName = String.format("%s.%s-%s.txt", sourceClass.getName(), sourceClass.getEnclosingMethod().getName(), DateTimeManager.ToFormat.toStraightTimestamp(new Date()));
-                File file = new File(createDir("error"), fileName);
+                File file = new File(createDir(folderName, ERROR), fileName);
                 PrintStream ps = new PrintStream(file);
                 eOutput.printStackTrace(ps);
                 ps.flush();
@@ -55,9 +56,9 @@ public class TextToFile {
         }
     }
 
-    public static void print(String fileName, Exception eOutput) {
+    public static void print(String folderName, String fileName, Exception eOutput) {
         try {
-            File file = new File(createDir("error"), fileName + DateTimeManager.ToFormat.toStraightTimestamp(new Date()) + ".txt");
+            File file = new File(createDir(folderName, ERROR), fileName + DateTimeManager.ToFormat.toStraightTimestamp(new Date()) + ".txt");
             PrintStream ps = new PrintStream(file);
             eOutput.printStackTrace(ps);
             ps.flush();
@@ -67,17 +68,13 @@ public class TextToFile {
         }
     }
 
-    private static File createDir(String sSubFolder) {
+    private static File createDir(String folderName, String sSubFolder) {
         File storage = Environment.getExternalStorageDirectory();
         File folder = new File(storage.getAbsolutePath() + File.separator + "MTR_RDNG");
         File fSubFolder = new File(folder, sSubFolder);
-        if (folder.mkdir()) {
-            if (fSubFolder.mkdir())
-                return fSubFolder;
-            else
-                return null;
-        } else
-            return null;
+        folder.mkdir();
+        fSubFolder.mkdir();
+        return fSubFolder;
     }
 
     public static File getFolder() {
