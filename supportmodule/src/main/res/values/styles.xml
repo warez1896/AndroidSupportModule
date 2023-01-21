@@ -3,11 +3,13 @@
     <!-- Base application theme. -->
     <style name="Theme.SupportModule" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!--Main-->
-        <item name="android:fontFamily">@font/google_sans</item>
+        <!--        <item name="android:fontFamily">@font/san_francisco</item>-->
+        <item name="android:fontFamily">@font/san_francisco</item>
         <item name="android:windowBackground">@color/bg</item>
         <item name="android:textSize">@dimen/standard_text</item>
         <item name="android:textColor">@color/text_disabled</item>
         <item name="android:buttonStyle">@style/btn_std</item>
+        <item name="android:dropDownListViewStyle">@style/spinner_dialog_window</item>
         <item name="editTextStyle">@style/text_box</item>
         <item name="autoCompleteTextViewStyle">@style/actext_box</item>
         <item name="spinnerStyle">@style/spinner</item>
@@ -38,6 +40,17 @@
         <item name="android:layout_marginEnd">@dimen/dynamic_8</item>
         <item name="android:paddingTop">@dimen/dynamic_8</item>
         <item name="android:paddingBottom">@dimen/dynamic_8</item>
+    </style>
+
+    <style name="spinner_dropdown" parent="Widget.AppCompat.ListView.DropDown">
+        <item name="android:divider">@drawable/empty_divider_12</item>
+        <item name="android:dividerHeight">@dimen/dynamic_12</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+
+    <style name="spinner_dialog_window">
+        <item name="android:divider">@drawable/empty_divider_12</item>
+        <item name="android:background">@color/transparent</item>
     </style>
 
     <style name="alert_btn_green" parent="btn_green">
@@ -161,5 +174,9 @@
     <style name="sub_header">
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/t4</item>
+    </style>
+
+    <style name="sub_text">
+        <item name="android:textSize">@dimen/t6</item>
     </style>
 </resources>

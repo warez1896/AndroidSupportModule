@@ -1,9 +1,9 @@
 package com.ediwow.supportmodule.backend;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 public class CustomAlertDialog {
     private AlertDialog alertDialog;
@@ -22,6 +22,14 @@ public class CustomAlertDialog {
 
     public CustomAlertDialog(@NonNull AlertDialog.Builder builder, boolean createNow) {
         constructor(builder, createNow);
+    }
+
+    public AlertDialog getAlertDialog() {
+        return this.alertDialog;
+    }
+
+    public AlertDialog.Builder getBuilder() {
+        return this.builder;
     }
 
     private void constructor(@NonNull AlertDialog.Builder builder, boolean createNow) {
@@ -68,5 +76,10 @@ public class CustomAlertDialog {
             } else return false;
         } else
             return false;
+    }
+
+    public void setMessage(String message) {
+        if (alertDialog != null)
+            alertDialog.setMessage(message);
     }
 }
