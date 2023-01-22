@@ -10,6 +10,8 @@ import java.util.Date;
 
 public class TextToFile {
     private static final String VERBOSE = "verbose", ERROR = "error";
+    private static String currentFolder = null;
+
     public static void print(String folderName, String fileName, String output) {
         if (!Meta.isProduction) {
             try {
@@ -69,8 +71,9 @@ public class TextToFile {
     }
 
     private static File createDir(String folderName, String sSubFolder) {
+        currentFolder = folderName;
         File storage = Environment.getExternalStorageDirectory();
-        File folder = new File(storage.getAbsolutePath() + File.separator + "MTR_RDNG");
+        File folder = new File(storage.getAbsolutePath() + File.separator + folderName);
         File fSubFolder = new File(folder, sSubFolder);
         folder.mkdir();
         fSubFolder.mkdir();
@@ -78,8 +81,12 @@ public class TextToFile {
     }
 
     public static File getFolder() {
-        File storage = Environment.getExternalStorageDirectory();
-        File folder = new File(storage.getAbsolutePath() + File.separator + "MTR_RDNG");
-        return new File(folder, "captures");
+        File file = null;
+        if (currentFolder != null) {
+            File storage = Environment.getExternalStorageDirectory();
+            File folder = new File(storage.getAbsolutePath() + File.separator + currentFolder);
+            file = new File(folder, "captures");
+        }
+        return file;
     }
 }

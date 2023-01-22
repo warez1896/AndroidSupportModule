@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Primary-->
+    <color name="transparent">#00000000</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <!--Shades of gray-->
-    <color name="black_label">#80000000</color>
     <color name="lightGray">#bfbfbf</color>
     <color name="lightGrayHalfOpaque">#80bfbfbf</color>
     <color name="lighterGray">#cfcfcf</color>
@@ -12,6 +12,7 @@
     <color name="gray">#afafaf</color>
     <color name="grayHalfOpaque">#99afafaf</color>
     <color name="darkGray">#636363</color>
+    <color name="darkerGray">#525252</color>
 
     <!--Colors-->
     <color name="green">#108700</color>
@@ -23,10 +24,12 @@
     <color name="yellow">#e0a800</color>
 
     <!--Elements-->
+    <color name="text_std">@color/black</color>
+    <color name="subtext_std">@color/darkGray</color>
     <color name="bg">@color/white</color>
     <color name="std">@color/washed_blue</color>
     <color name="text_disabled">@color/darkGray</color>
-    <color name="text_hint">@color/darkGray</color>
+    <color name="text_hint">@color/darkerGray</color>
     <color name="btn_disabled">#aaa</color>
     <color name="text_box_border">@color/gray</color>
     <color name="text_box_bg">@color/grayHalfOpaque</color>

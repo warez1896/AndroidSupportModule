@@ -1,6 +1,7 @@
 package com.ediwow.supportmodule.backend;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 
 import androidx.core.app.ActivityCompat;
@@ -12,7 +13,11 @@ public class PermissionChecker {
 
     }
 
-    public static void checkPermissions(Activity activity, String[] permissions) {
+    public static String[] getDeclaredPermissionsInManifest(Context context) throws Exception {
+        return context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_PERMISSIONS).requestedPermissions;
+    }
+
+    public static void checkPermissions(Activity activity, String[] permissions, int requestCode) {
         boolean allPermissionsApproved = true;
         for (String permission : permissions) {
             if (activity.checkSelfPermission(permission) == DENIED) {
@@ -21,11 +26,10 @@ public class PermissionChecker {
             }
         }
         if (!allPermissionsApproved)
-            requestPermissions(activity, permissions);
-
+            requestPermissions(activity, permissions, requestCode);
     }
 
-    private static void requestPermissions(Activity activity, String[] permissions) {
-        ActivityCompat.requestPermissions(activity, permissions, 100);
+    private static void requestPermissions(Activity activity, String[] permissions, int requestCode) {
+        ActivityCompat.requestPermissions(activity, permissions, requestCode);
     }
 }
