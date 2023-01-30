@@ -3,10 +3,12 @@
     <property name="created">2023-01-21T19:39:58</property>
     <property name="ide">AndroidStudio</property>
     <property name="ideVersion">2022.1.1.19</property>
-    <property name="modified">2023-01-21T19:40:46</property>
+    <property name="modified">2023-01-30T10:26:28</property>
     <property name="originalScheme">Darcula</property>
   </metaInfo>
   <attributes>
+    <option name="DEFAULT_IDENTIFIER" baseAttributes="TEXT" />
+    <option name="HTML_ATTRIBUTE_NAME" baseAttributes="DEFAULT_ATTRIBUTE" />
     <option name="TEXT">
       <value>
         <option name="FOREGROUND" value="ffffff" />
@@ -14,5 +16,6 @@
         <option name="EFFECT_TYPE" value="5" />
       </value>
     </option>
+    <option name="XML_ATTRIBUTE_NAME" baseAttributes="DEFAULT_ATTRIBUTE" />
   </attributes>
 </scheme>
