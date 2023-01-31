@@ -1,7 +1,10 @@
 <application>
   <component name="FindSettings">
+    <option name="customScope" value="Project 'Meter Reading and Billing System'" />
+    <option name="defaultScopeName" value="Project 'Meter Reading and Billing System'" />
     <option name="localWholeWordsOnly" value="true" />
     <option name="LOCAL_WHOLE_WORDS_ONLY" value="true" />
+    <option name="SEARCH_SCOPE" value="Project 'Meter Reading and Billing System'" />
     <mask>*.css</mask>
     <mask>*.html</mask>
     <mask>*.xml</mask>
