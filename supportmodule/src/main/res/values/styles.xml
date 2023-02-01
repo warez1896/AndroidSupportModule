@@ -173,7 +173,7 @@
 
     <style name="sub_header">
         <item name="android:textColor">@color/text_std</item>
-        <item name="android:textSize">@dimen/t4</item>
+        <item name="android:textSize">@dimen/t5</item>
     </style>
 
     <style name="sub_text">
