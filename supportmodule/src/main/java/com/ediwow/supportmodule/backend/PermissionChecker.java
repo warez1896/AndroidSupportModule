@@ -20,6 +20,7 @@ public class PermissionChecker {
     public static void checkPermissions(Activity activity, String[] permissions, int requestCode) {
         boolean allPermissionsApproved = true;
         for (String permission : permissions) {
+            System.out.println("Permission check: " + permission);
             if (activity.checkSelfPermission(permission) == DENIED) {
                 allPermissionsApproved = false;
                 break;
