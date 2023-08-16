@@ -19,12 +19,21 @@ import java.nio.charset.StandardCharsets;
 public class ConnectionManager {
     private final HostManager hostManager;
     private final int connectTimeOut, readTimeOut;
+    private String propertyName = "", propertyValue = "";
     public static final boolean DOWNLOAD = false, UPLOAD = true;
 
     public ConnectionManager(HostManager hostManager, int connectTimeOut, int readTimeOut) {
         this.hostManager = hostManager;
         this.connectTimeOut = connectTimeOut;
         this.readTimeOut = readTimeOut;
+    }
+
+    public ConnectionManager(HostManager hostManager, int connectTimeOut, int readTimeOut, String propertyName, String propertyValue) {
+        this.hostManager = hostManager;
+        this.connectTimeOut = connectTimeOut;
+        this.readTimeOut = readTimeOut;
+        this.propertyName = propertyName;
+        this.propertyValue = propertyValue;
     }
 
     private void checkConnection(HttpURLConnection conn) throws Exception {
@@ -47,6 +56,7 @@ public class ConnectionManager {
         return obj;
     }
 
+    //TODO: Increase modularity
     public JSONObject startConnection(URLParamsAdapter params) throws Exception {
         JSONObject obj = new JSONObject();
         obj.put("resCode", Constants.RequestResponse.RES_BLANK);
@@ -68,6 +78,27 @@ public class ConnectionManager {
         return obj;
     }
 
+//    public JSONObject startConnection(byte[] bytes) throws Exception {
+//        JSONObject obj = new JSONObject();
+//        obj.put("resCode", Constants.RequestResponse.RES_BLANK);
+//        boolean success = false;
+//        SocketTimeoutException socketTimeoutException = null;
+//        for (URL url : hostManager.getArrURLs()) {
+//            try {
+//                HttpURLConnection conn = getConnection(url);
+//                obj = directWrite(conn, bytes);
+//                success = true;
+//                break;
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                socketTimeoutException = (e instanceof SocketTimeoutException) ? (SocketTimeoutException) e : null;
+//            }
+//        }
+//        if (!success && socketTimeoutException != null)
+//            obj.put("resCode", Constants.RequestResponse.RES_TIMEOUT);
+//        return obj;
+//    }
+
     private HttpURLConnection getConnection(URL url) throws Exception {
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         checkConnection(conn);
@@ -76,6 +107,8 @@ public class ConnectionManager {
         conn.setDoInput(true);
         conn.setConnectTimeout(connectTimeOut);
         conn.setReadTimeout(readTimeOut);
+        if (!this.propertyName.trim().isEmpty() && !this.propertyValue.trim().isEmpty())
+            conn.setRequestProperty(propertyName, propertyValue);
         return conn;
     }
 
@@ -89,6 +122,14 @@ public class ConnectionManager {
         System.out.println(urlParam);
         return downloadData(conn);
     }
+
+//    private JSONObject directWrite(HttpURLConnection conn, byte[] bytes) throws Exception {
+//        OutputStream out = conn.getOutputStream();
+//        out.write(bytes);
+//        out.flush();
+//        out.close();
+//        return downloadData(conn);
+//    }
 
     private JSONObject downloadData(HttpURLConnection conn) throws Exception {
         JSONObject obj;

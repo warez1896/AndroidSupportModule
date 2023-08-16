@@ -2,10 +2,15 @@ package com.ediwow.supportmodule.backend;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Build;
 import android.provider.Settings;
 import android.util.TypedValue;
 
+import org.json.JSONObject;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.security.MessageDigest;
 
 public class DataProcessor {
@@ -36,6 +41,29 @@ public class DataProcessor {
         deviceInfo[1] = Build.MODEL;
         deviceInfo[2] = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
         return deviceInfo;
+    }
+
+    public static BigDecimal getFixedDecimal(Cursor cursor, int index, int scale) {
+        BigDecimal finalDecimal = null;
+        double dValue;
+        if (!cursor.isNull(index)) {
+            dValue = cursor.getDouble(index);
+            finalDecimal = new BigDecimal(dValue).setScale(scale, RoundingMode.HALF_UP);
+        }
+        return finalDecimal;
+    }
+
+    public static String getJSONStringOrNull(JSONObject obj, String keyword) throws Exception {
+        return (obj.has(keyword) && !obj.isNull(keyword)) ? obj.getString(keyword) : null;
+    }
+
+    public static BigDecimal getFixedDecimal(String value, int scale) throws Exception {
+        BigDecimal finalDecimal = null;
+        if (value != null) {
+            double dValue = Double.parseDouble(value);
+            finalDecimal = new BigDecimal(dValue).setScale(scale, RoundingMode.HALF_UP);
+        }
+        return finalDecimal;
     }
 
     public static int toPixels(Context context, int unitType, int unitValue) {
