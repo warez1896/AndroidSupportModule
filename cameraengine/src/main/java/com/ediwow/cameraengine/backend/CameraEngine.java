@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageCapture;
+import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.ImageInfo;
 import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
@@ -21,6 +22,7 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.ediwow.cameraengine.interfaces.BitmapGeneratedCallback;
+import com.ediwow.cameraengine.interfaces.GenericCallback;
 import com.ediwow.cameraengine.interfaces.OnViewfinderToggle;
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -46,15 +48,17 @@ public class CameraEngine {
     private ImageCapture.OnImageCapturedCallback captureCallback;
     private final BitmapGeneratedCallback bitmapGeneratedCallback;
     private final OnViewfinderToggle onViewfinderToggle;
+    private final GenericCallback errorCallback;
 
     private int imageRotation = 0;
 
-    public CameraEngine(Context context, Preview.SurfaceProvider surfaceProvider, OnViewfinderToggle onViewfinderToggle, LifecycleOwner lifecycleOwner, BitmapGeneratedCallback bitmapGeneratedCallback) {
+    public CameraEngine(Context context, Preview.SurfaceProvider surfaceProvider, OnViewfinderToggle onViewfinderToggle, LifecycleOwner lifecycleOwner, BitmapGeneratedCallback bitmapGeneratedCallback, GenericCallback errorCallback) {
         this.context = context;
         this.surfaceProvider = surfaceProvider;
         this.onViewfinderToggle = onViewfinderToggle;
         this.lifecycleOwner = lifecycleOwner;
         this.bitmapGeneratedCallback = bitmapGeneratedCallback;
+        this.errorCallback = errorCallback;
         getCameraSpecs();
         setupCamera();
     }
@@ -88,9 +92,20 @@ public class CameraEngine {
         this.captureCallback = new ImageCapture.OnImageCapturedCallback() {
             @Override
             public void onCaptureSuccess(@NonNull ImageProxy imageProxy) {
+                System.out.println("Capture image success");
                 Bitmap bitmap = buildBitmapFromImageProxy(imageProxy);
+
+                imageProxy.close();
+
                 Bitmap croppedBitmap = cropAndScaleBitmap(bitmap);
                 bitmapGeneratedCallback.onFinalBitmapGenerated(croppedBitmap);
+            }
+
+            @Override
+            public void onError(@NonNull ImageCaptureException exception) {
+                System.out.println("Capture image failed");
+                exception.printStackTrace();
+                errorCallback.onCallback();
             }
         };
 
@@ -132,6 +147,7 @@ public class CameraEngine {
 
     public boolean captureImage() {
         if (this.cameraExecutor != null) {
+            System.out.println("Attempting image capture");
             imageCapture.takePicture(this.cameraExecutor, captureCallback);
             return true;
         } else

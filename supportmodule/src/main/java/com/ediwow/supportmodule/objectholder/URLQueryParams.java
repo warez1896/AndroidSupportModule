@@ -1,5 +1,7 @@
 package com.ediwow.supportmodule.objectholder;
 
+import androidx.annotation.NonNull;
+
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
@@ -47,6 +49,7 @@ public class URLQueryParams {
             this.paramSet = paramSet;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return getParamSet();
