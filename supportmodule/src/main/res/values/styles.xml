@@ -133,6 +133,11 @@
         <item name="android:padding">@dimen/dynamic_16</item>
     </style>
 
+    <style name="jumbotron.outline.filled" parent="element_base">
+        <item name="android:background">@drawable/jumbotron_outline_filled</item>
+        <item name="android:padding">@dimen/dynamic_16</item>
+    </style>
+
     <style name="jumbotron.padless" parent="element_base">
         <!--        <item name="android:background">@drawable/jumbotron</item>-->
         <item name="android:padding">0dp</item>
