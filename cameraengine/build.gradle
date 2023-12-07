@@ -13,7 +13,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        minSdk 29
+        minSdk 27
         targetSdk 33
         versionCode 1
         versionName "Mk1"

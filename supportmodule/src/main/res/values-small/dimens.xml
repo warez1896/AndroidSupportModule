@@ -9,6 +9,7 @@
     <dimen name="standard_text">14sp</dimen>
     <dimen name="thickness">2dp</dimen>
     <dimen name="corner_1">10dp</dimen>
+    <dimen name="dynamic_32">16dp</dimen>
     <dimen name="dynamic_16">8dp</dimen>
     <dimen name="dynamic_12">6dp</dimen>
     <dimen name="dynamic_8">4dp</dimen>

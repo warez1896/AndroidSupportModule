@@ -1,11 +1,18 @@
 package com.ediwow.supportmodule.interfaces;
 
-import org.json.JSONObject;
+import androidx.annotation.Nullable;
 
-public interface ExecutionPhases {
-    void preExecute();
+public interface ExecutionPhases<T> {
+    default void preExecute() {
 
-    JSONObject execute();
+    }
 
-    void postExecute(JSONObject resultObj);
+    @Nullable
+    default T execute() {
+        return null;
+    }
+
+    default void postExecute(@Nullable T resultObj) {
+
+    }
 }

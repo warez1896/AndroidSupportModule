@@ -8,11 +8,11 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
-public class ServerTimeComputer {
+public class ChronoSyncPairing {
     private final Date serverTimestamp;
     private final BigDecimal cpuUptime;
 
-    public ServerTimeComputer(@NonNull Date serverTimestamp, @NonNull BigDecimal cpuUptime) {
+    public ChronoSyncPairing(@NonNull Date serverTimestamp, @NonNull BigDecimal cpuUptime) {
         this.serverTimestamp = serverTimestamp;
         this.cpuUptime = cpuUptime;
     }

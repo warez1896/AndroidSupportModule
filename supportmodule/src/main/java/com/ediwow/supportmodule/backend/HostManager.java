@@ -36,6 +36,18 @@ public class HostManager {
         return obj;
     }
 
+    public static JSONObject toJSON(String host, int port) throws JSONException {
+        JSONObject obj = new JSONObject();
+        JSONArray arr = new JSONArray();
+        arr.put(new JSONObject().put("host", host).put("port", port));
+        obj.put("hosts", arr);
+        return obj;
+    }
+
+    public static HostPort toHostPort(String host, int port) {
+        return new HostPort(host, port);
+    }
+
     public static ArrayList<Host> toArrayList(JSONObject object, String... paths) throws JSONException {
         JSONArray arr = object.getJSONArray("hosts");
         ArrayList<Host> arrHosts = new ArrayList<>();
@@ -45,6 +57,19 @@ public class HostManager {
         }
         return arrHosts;
     }
+
+    public static ArrayList<Host> toArrayList(HostPort hostPort, String... paths) {
+        ArrayList<Host> arrHosts = new ArrayList<>();
+        arrHosts.add(new Host(hostPort.host, hostPort.port, paths));
+        return arrHosts;
+    }
+
+    public HostManager(HostPort hostPort, String... paths) throws Exception {
+        this.arrHosts = new ArrayList<>();
+        this.arrHosts.add(new Host(hostPort.host, hostPort.port, paths));
+        generateURLs();
+    }
+
 
     public HostManager(JSONArray hostArray, String... paths) throws JSONException, MalformedURLException {
         this.arrHosts = new ArrayList<>();
@@ -72,4 +97,13 @@ public class HostManager {
         return this.arrURLs;
     }
 
+    public static class HostPort {
+        public final String host;
+        public final int port;
+
+        public HostPort(String host, int port) {
+            this.host = host;
+            this.port = port;
+        }
+    }
 }

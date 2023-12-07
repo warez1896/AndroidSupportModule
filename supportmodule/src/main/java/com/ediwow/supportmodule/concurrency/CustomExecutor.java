@@ -6,13 +6,13 @@ import com.ediwow.supportmodule.interfaces.ExecutionPhases;
 
 import org.json.JSONObject;
 
-public abstract class CustomExecutor implements ExecutionPhases {
+public abstract class CustomExecutor<T> implements ExecutionPhases<T> {
     private final Thread thread;
 
     public CustomExecutor(Activity activity) {
         thread = new Thread(() -> {
-            JSONObject resultObj = execute();
-            activity.runOnUiThread(() -> postExecute(resultObj));
+            T result = execute();
+            activity.runOnUiThread(() -> postExecute(result));
         });
     }
 

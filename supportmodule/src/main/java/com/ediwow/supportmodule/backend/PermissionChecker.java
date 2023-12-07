@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.PermissionInfo;
+import android.os.Build;
 
 import androidx.core.app.ActivityCompat;
 
@@ -24,8 +25,8 @@ public class PermissionChecker {
             try {
                 PermissionInfo permissionInfo = activity.getPackageManager().getPermissionInfo(permission, 0);
                 int permissionResult = activity.checkSelfPermission(permission);
-                int protectionLevel = permissionInfo.protectionLevel;
-                String sProtectionLevel = "";
+                int protectionLevel =  (Build.VERSION.SDK_INT >= 28) ? permissionInfo.getProtection() : permissionInfo.protectionLevel;
+                String sProtectionLevel;
                 switch (protectionLevel) {
                     case PermissionInfo.PROTECTION_DANGEROUS:
                         sProtectionLevel = "Dangerous";
@@ -35,6 +36,9 @@ public class PermissionChecker {
                         break;
                     case PermissionInfo.PROTECTION_SIGNATURE:
                         sProtectionLevel = "Signature";
+                        break;
+                    default:
+                        sProtectionLevel = "Unknown";
                         break;
                 }
                 System.out.println("Permission check: " + permission + " - " + sProtectionLevel + " -" + ((permissionResult == GRANTED) ? "Approved" : "Denied"));

@@ -4,11 +4,17 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Build;
+import android.os.Environment;
 import android.provider.Settings;
 import android.util.TypedValue;
 
+import androidx.annotation.NonNull;
+
+import com.ediwow.supportmodule.objectholder.DeviceInformation;
+
 import org.json.JSONObject;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.security.MessageDigest;
@@ -35,12 +41,8 @@ public class DataProcessor {
     }
 
     @SuppressLint("HardwareIds")
-    public static String[] loadDeviceInformation(Context context) {
-        String[] deviceInfo = new String[]{"", "", ""};
-        deviceInfo[0] = Build.MANUFACTURER;
-        deviceInfo[1] = Build.MODEL;
-        deviceInfo[2] = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
-        return deviceInfo;
+    public static DeviceInformation loadDeviceInformation(Context context) {
+        return new DeviceInformation(Build.MANUFACTURER, Build.MODEL, Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID));
     }
 
     public static BigDecimal getFixedDecimal(Cursor cursor, int index, int scale) {
@@ -68,5 +70,21 @@ public class DataProcessor {
 
     public static int toPixels(Context context, int unitType, int unitValue) {
         return (int) TypedValue.applyDimension(unitType, unitValue, context.getResources().getDisplayMetrics());
+    }
+
+    public static File verifyImageFile(@NonNull String path, @NonNull String folderContext) {
+        String[] exts = {".jpg", ".jpeg"};
+        String parentDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + File.separator + folderContext;
+        if (!path.endsWith(".jpg"))
+            path = path + ".jpg";
+        File imageFile = new File(parentDir, path);
+        for (String ext : exts) {
+            if (imageFile.exists())
+                break;
+            imageFile = new File(parentDir, path + ext);
+        }
+        if (!imageFile.exists())
+            imageFile = null;
+        return imageFile;
     }
 }

@@ -70,6 +70,18 @@ public class TextToFile {
         }
     }
 
+    public static void print(String folderName, String fileName, Throwable throwable){
+        try {
+            File file = new File(createDir(folderName, ERROR), fileName + DateTimeManager.ToFormat.toStraightTimestamp(new Date()) + ".txt");
+            PrintStream ps = new PrintStream(file);
+            throwable.printStackTrace(ps);
+            ps.flush();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private static File createDir(String folderName, String sSubFolder) {
         currentFolder = folderName;
         File storage = Environment.getExternalStorageDirectory();

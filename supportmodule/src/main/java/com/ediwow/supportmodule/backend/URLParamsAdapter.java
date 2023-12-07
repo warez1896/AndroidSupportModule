@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class URLParamsAdapter extends ArrayList<URLQueryParams> {
     private final ArrayList<URLQueryParams.JoinedParams> arrJoinedParams;
@@ -20,9 +22,21 @@ public class URLParamsAdapter extends ArrayList<URLQueryParams> {
         }
     }
 
+    private void fromHashMap(HashMap<String, String> map, boolean urlEncoded) throws Exception {
+        if (map != null) {
+            for (Map.Entry<String, String> entry : map.entrySet())
+                add(new URLQueryParams(entry.getKey(), entry.getValue(), urlEncoded));
+        }
+    }
+
     public URLParamsAdapter(JSONObject paramsObj, boolean urlEncoded) throws Exception {
         arrJoinedParams = new ArrayList<>();
         fromJSON(paramsObj, urlEncoded);
+    }
+
+    public URLParamsAdapter(HashMap<String, String> map, boolean urlEncoded) throws Exception {
+        arrJoinedParams = new ArrayList<>();
+        fromHashMap(map, urlEncoded);
     }
 
     public URLParamsAdapter() {

@@ -36,4 +36,8 @@ public class MainAlertDialogFactory {
         builder.setCancelable(false);
         return builder;
     }
+
+    protected Activity getActivity(){
+        return activity;
+    }
 }

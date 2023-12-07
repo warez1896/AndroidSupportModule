@@ -8,6 +8,7 @@
     <dimen name="t6">12sp</dimen>
     <dimen name="thickness">2dp</dimen>
     <dimen name="corner_1">16dp</dimen>
+    <dimen name="dynamic_32">32dp</dimen>
     <dimen name="dynamic_16">16dp</dimen>
     <dimen name="dynamic_12">12dp</dimen>
     <dimen name="dynamic_8">8dp</dimen>
