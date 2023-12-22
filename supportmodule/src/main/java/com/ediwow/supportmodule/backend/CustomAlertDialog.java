@@ -38,8 +38,8 @@ public class CustomAlertDialog {
     }
 
     public void create() {
-        if (builder != null)
-            this.alertDialog = this.builder.create();
+        if (builder != null) this.alertDialog = this.builder.create();
+        else System.out.println("No builder to create from");
     }
 
     public void setButton(byte mode, String text, DialogInterface.OnClickListener listener) {
@@ -55,7 +55,7 @@ public class CustomAlertDialog {
                     builder.setNegativeButton(text, listener);
                     break;
             }
-        }
+        } else System.out.println("No builder to modify from");
     }
 
     public boolean show() {
@@ -64,8 +64,10 @@ public class CustomAlertDialog {
                 alertDialog.show();
                 return true;
             } else return false;
-        } else
+        } else {
+            System.out.println("No AlertDialog found");
             return false;
+        }
     }
 
     public boolean dismiss() {
@@ -74,12 +76,14 @@ public class CustomAlertDialog {
                 alertDialog.dismiss();
                 return true;
             } else return false;
-        } else
+        } else {
+            System.out.println("No AlertDialog found");
             return false;
+        }
     }
 
     public void setMessage(String message) {
-        if (alertDialog != null)
-            alertDialog.setMessage(message);
+        if (alertDialog != null) alertDialog.setMessage(message);
+        else System.out.println("No AlertDialog found");
     }
 }

@@ -15,13 +15,14 @@
     <color name="darkerGray">#525252</color>
 
     <!--Colors-->
-    <color name="green">#108700</color>
-    <color name="washed_green">#c3e6cb</color>
-    <color name="red">#d33c00</color>
-    <color name="washed_red">#f5c6cb</color>
-    <color name="blue">#0050c9</color>
-    <color name="washed_blue">#b8daff</color>
-    <color name="yellow">#e0a800</color>
+    <color name="green">#198754</color>
+    <color name="washed_green">#d1e7dd</color>
+    <color name="red">#dc3545</color>
+    <color name="washed_red">#f8d7da</color>
+    <color name="blue">#0d6efd</color>
+    <color name="washed_blue">#cfe2ff</color>
+    <color name="yellow">#ffc107</color>
+    <color name="washed_yellow">#fff3cd</color>
 
     <!--Elements-->
     <color name="text_std">@color/black</color>
@@ -35,6 +36,8 @@
     <color name="text_box_bg">@color/grayHalfOpaque</color>
     <color name="jumbotron">@color/lighterGray</color>
     <color name="card_std">@color/evenLighterGray</color>
+    <color name="card_blue">@color/washed_blue</color>
     <color name="card_red">@color/washed_red</color>
     <color name="card_green">@color/washed_green</color>
+    <color name="card_yellow">@color/washed_yellow</color>
 </resources>

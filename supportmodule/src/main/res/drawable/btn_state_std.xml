@@ -9,7 +9,7 @@
     <item android:drawable="@drawable/btn_disabled" android:state_enabled="false" />
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/std" />
+            <solid android:color="@color/washed_blue" />
             <corners android:radius="@dimen/corner_1" />
         </shape>
     </item>
