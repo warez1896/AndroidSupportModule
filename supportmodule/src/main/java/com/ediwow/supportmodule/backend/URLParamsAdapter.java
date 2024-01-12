@@ -47,7 +47,6 @@ public class URLParamsAdapter extends ArrayList<URLQueryParams> {
         StringBuilder sb = new StringBuilder();
         for (URLQueryParams params : this)
             arrJoinedParams.add(new URLQueryParams.JoinedParams(params));
-
         for (URLQueryParams.JoinedParams joinedParams : arrJoinedParams)
             sb.append(joinedParams).append("&");
         if (sb.length() > 0)

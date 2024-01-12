@@ -3,7 +3,7 @@ package com.ediwow.supportmodule.objectholder;
 public class Host {
     private String hostAddress;
     private String[] paths;
-    int port;
+   private int port;
 
     public Host(String hostAddress, int port, String... paths) {
         setHostAddress(hostAddress);

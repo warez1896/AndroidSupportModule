@@ -1,15 +1,8 @@
 package com.ediwow.supportmodule.objectholder;
 
 public class Constants {
-
-    public static class RequestResponse {
-        public static final int RES_OK = 0;
-        public static final int RES_TIMEOUT = -1;
-        public static final int RES_ERR_EXCEPTION = -2;
-        public static final int RES_BLANK = -3;
-
-        private RequestResponse() {
-        }
+    public enum RequestResponse {
+        RES_OK, RES_TIMEOUT, RES_ERR_EXCEPTION, RES_BLANK
     }
 
     public static class Android {

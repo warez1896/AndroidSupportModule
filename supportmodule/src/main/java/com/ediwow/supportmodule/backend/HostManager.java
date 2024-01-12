@@ -70,7 +70,6 @@ public class HostManager {
         generateURLs();
     }
 
-
     public HostManager(JSONArray hostArray, String... paths) throws JSONException, MalformedURLException {
         this.arrHosts = new ArrayList<>();
         for (int i = 0; i < hostArray.length(); i++) {
