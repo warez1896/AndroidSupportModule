@@ -1,7 +1,5 @@
 package com.ediwow.supportmodule.backend;
 
-import androidx.annotation.NonNull;
-
 import org.json.JSONObject;
 
 import java.math.BigDecimal;

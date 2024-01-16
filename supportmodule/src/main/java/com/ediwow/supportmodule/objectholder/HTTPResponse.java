@@ -11,6 +11,11 @@ public class HTTPResponse {
         this.obj = obj;
     }
 
+    public HTTPResponse(Constants.RequestResponse responseCode){
+        this.responseCode = responseCode;
+        this.obj = new JSONObject();
+    }
+
     public Constants.RequestResponse getResponseCode() {
         return responseCode;
     }

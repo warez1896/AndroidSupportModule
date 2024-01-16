@@ -1,56 +1,51 @@
 package com.ediwow.supportmodule.backend;
 
-import com.ediwow.supportmodule.objectholder.URLQueryParams;
+import androidx.annotation.NonNull;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class URLParamsAdapter extends ArrayList<URLQueryParams> {
-    private final ArrayList<URLQueryParams.JoinedParams> arrJoinedParams;
+public class URLParamsAdapter extends ArrayList<String> {
 
-    private void fromJSON(JSONObject paramsObj, boolean urlEncoded) throws Exception {
+    private void fromJSON(JSONObject paramsObj) throws Exception {
         JSONArray arrNames = paramsObj.names();
         if (arrNames != null) {
             for (int i = 0; i < arrNames.length(); i++) {
                 String keyName = arrNames.getString(i);
-                add(new URLQueryParams(keyName, paramsObj.getString(keyName), urlEncoded));
+                add(String.format("%s=%s", keyName, URLEncoder.encode(paramsObj.getString(keyName), StandardCharsets.UTF_8.name())));
             }
         }
     }
 
-    private void fromHashMap(HashMap<String, String> map, boolean urlEncoded) throws Exception {
+    private void fromHashMap(HashMap<String, String> map) throws Exception {
         if (map != null) {
             for (Map.Entry<String, String> entry : map.entrySet())
-                add(new URLQueryParams(entry.getKey(), entry.getValue(), urlEncoded));
+                add(String.format("%s=%s", entry.getKey(), URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8.name())));
         }
     }
 
-    public URLParamsAdapter(JSONObject paramsObj, boolean urlEncoded) throws Exception {
-        arrJoinedParams = new ArrayList<>();
-        fromJSON(paramsObj, urlEncoded);
+    public boolean add(@NonNull String key, String value) throws Exception {
+        return add(String.format("%s=%s", key, URLEncoder.encode(value, StandardCharsets.UTF_8.name())));
     }
 
-    public URLParamsAdapter(HashMap<String, String> map, boolean urlEncoded) throws Exception {
-        arrJoinedParams = new ArrayList<>();
-        fromHashMap(map, urlEncoded);
+    public URLParamsAdapter(JSONObject paramsObj) throws Exception {
+        fromJSON(paramsObj);
+    }
+
+    public URLParamsAdapter(HashMap<String, String> map) throws Exception {
+        fromHashMap(map);
     }
 
     public URLParamsAdapter() {
-        arrJoinedParams = new ArrayList<>();
     }
 
     public String toWholeURLParamString() {
-        StringBuilder sb = new StringBuilder();
-        for (URLQueryParams params : this)
-            arrJoinedParams.add(new URLQueryParams.JoinedParams(params));
-        for (URLQueryParams.JoinedParams joinedParams : arrJoinedParams)
-            sb.append(joinedParams).append("&");
-        if (sb.length() > 0)
-            sb.setLength(sb.length() - 1);
-        return sb.toString();
+        return String.join("&", this);
     }
 }

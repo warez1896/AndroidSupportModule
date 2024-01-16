@@ -43,7 +43,7 @@ public class ConnectionManager {
 
     public JSONObject startConnection() throws Exception {
         JSONObject obj = new JSONObject();
-        obj.put("resCode", Constants.RequestResponse.RES_BLANK);
+        obj.put("resCode", Constants.RequestResponse.BLANK);
         for (URL url : hostManager.getArrURLs()) {
             try {
                 HttpURLConnection conn = getConnection(url);
@@ -59,7 +59,7 @@ public class ConnectionManager {
     //TODO: Increase modularity
     public JSONObject startConnection(URLParamsAdapter params) throws Exception {
         JSONObject obj = new JSONObject();
-        obj.put("resCode", Constants.RequestResponse.RES_BLANK);
+        obj.put("resCode", Constants.RequestResponse.BLANK);
         boolean success = false;
         SocketTimeoutException socketTimeoutException = null;
         for (URL url : hostManager.getArrURLs()) {
@@ -74,30 +74,9 @@ public class ConnectionManager {
             }
         }
         if (!success && socketTimeoutException != null)
-            obj.put("resCode", Constants.RequestResponse.RES_TIMEOUT);
+            obj.put("resCode", Constants.RequestResponse.TIMEOUT);
         return obj;
     }
-
-//    public JSONObject startConnection(byte[] bytes) throws Exception {
-//        JSONObject obj = new JSONObject();
-//        obj.put("resCode", Constants.RequestResponse.RES_BLANK);
-//        boolean success = false;
-//        SocketTimeoutException socketTimeoutException = null;
-//        for (URL url : hostManager.getArrURLs()) {
-//            try {
-//                HttpURLConnection conn = getConnection(url);
-//                obj = directWrite(conn, bytes);
-//                success = true;
-//                break;
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//                socketTimeoutException = (e instanceof SocketTimeoutException) ? (SocketTimeoutException) e : null;
-//            }
-//        }
-//        if (!success && socketTimeoutException != null)
-//            obj.put("resCode", Constants.RequestResponse.RES_TIMEOUT);
-//        return obj;
-//    }
 
     private HttpURLConnection getConnection(URL url) throws Exception {
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -123,14 +102,6 @@ public class ConnectionManager {
         return downloadData(conn);
     }
 
-//    private JSONObject directWrite(HttpURLConnection conn, byte[] bytes) throws Exception {
-//        OutputStream out = conn.getOutputStream();
-//        out.write(bytes);
-//        out.flush();
-//        out.close();
-//        return downloadData(conn);
-//    }
-
     private JSONObject downloadData(HttpURLConnection conn) throws Exception {
         JSONObject obj;
         StringBuilder sb = new StringBuilder();
@@ -148,11 +119,11 @@ public class ConnectionManager {
         conn.disconnect();
         if (output.isEmpty()) {
             obj = new JSONObject();
-            obj.put("resCode", Constants.RequestResponse.RES_BLANK);
+            obj.put("resCode", Constants.RequestResponse.BLANK);
         } else {
             obj = new JSONObject(output);
             if (!obj.has("resCode"))
-                obj.put("resCode", Constants.RequestResponse.RES_OK);
+                obj.put("resCode", Constants.RequestResponse.OK);
         }
         return obj;
     }

@@ -10,10 +10,11 @@ public class Meta {
     private static User user = null;
     private static ChronoSyncPairing chronoSyncPairing = null;
 
-    public static void setUser(User user) {
+    public static void setUser(@Nullable User user) {
         Meta.user = user;
     }
 
+    @Nullable
     public static User getUser() {
         return user;
     }

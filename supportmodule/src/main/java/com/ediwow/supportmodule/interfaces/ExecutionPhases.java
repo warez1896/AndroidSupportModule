@@ -1,18 +1,16 @@
 package com.ediwow.supportmodule.interfaces;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 
 public interface ExecutionPhases<T> {
     default void preExecute() {
 
     }
 
-    @Nullable
-    default T execute() {
-        return null;
-    }
+    @NonNull
+    T execute();
 
-    default void postExecute(@Nullable T resultObj) {
+    default void postExecute(@NonNull T result) {
 
     }
 }

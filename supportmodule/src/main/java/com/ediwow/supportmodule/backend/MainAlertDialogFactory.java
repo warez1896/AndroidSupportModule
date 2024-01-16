@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -58,7 +56,7 @@ public class MainAlertDialogFactory {
 
         View view = customView();
         TextView tvTitle = customTitle(view);
-        tvTitle.setText("Please wait");
+        tvTitle.setText(R.string.please_wait);
         builder.setCustomTitle(view);
         builder.setMessage(message);
         builder.setCancelable(false);
