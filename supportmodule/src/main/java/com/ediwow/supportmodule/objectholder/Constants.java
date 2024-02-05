@@ -2,7 +2,7 @@ package com.ediwow.supportmodule.objectholder;
 
 public class Constants {
     public enum RequestResponse {
-        OK, BLANK, TIMEOUT, ERROR, UNKNOWN
+        OK, BLANK, NO_CONNECTION, TIMEOUT, ERROR, UNKNOWN
     }
 
     public static class Android {

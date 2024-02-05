@@ -9,8 +9,8 @@
     <color name="lightGrayHalfOpaque">#80bfbfbf</color>
     <color name="lighterGray">#cfcfcf</color>
     <color name="evenLighterGray">#dfdfdf</color>
-    <color name="gray">#afafaf</color>
-    <color name="grayHalfOpaque">#99afafaf</color>
+    <color name="gray">#ddd</color>
+    <color name="grayer">#aaa</color>
     <color name="darkGray">#636363</color>
     <color name="darkerGray">#525252</color>
 
@@ -32,8 +32,8 @@
     <color name="text_disabled">@color/darkGray</color>
     <color name="text_hint">@color/darkerGray</color>
     <color name="btn_disabled">#aaa</color>
-    <color name="text_box_border">@color/gray</color>
-    <color name="text_box_bg">@color/grayHalfOpaque</color>
+    <color name="text_box_bg">@color/gray</color>
+    <color name="text_box_bg2">@color/grayer</color>
     <color name="jumbotron">@color/lighterGray</color>
     <color name="card_std">@color/evenLighterGray</color>
     <color name="card_blue">@color/washed_blue</color>

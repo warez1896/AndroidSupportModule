@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.nio.charset.StandardCharsets;
@@ -52,6 +53,9 @@ public class ConnectionManager2 {
         } catch (SocketTimeoutException e) {
             e.printStackTrace();
             response = new HTTPResponse(Constants.RequestResponse.TIMEOUT);
+        } catch (ConnectException e) {
+            e.printStackTrace();
+            response = new HTTPResponse(Constants.RequestResponse.NO_CONNECTION);
         } catch (JSONException e) {
             e.printStackTrace();
             response = new HTTPResponse(Constants.RequestResponse.ERROR);
@@ -71,6 +75,9 @@ public class ConnectionManager2 {
         } catch (SocketTimeoutException e) {
             e.printStackTrace();
             response = new HTTPResponse(Constants.RequestResponse.TIMEOUT);
+        } catch (ConnectException e) {
+            e.printStackTrace();
+            response = new HTTPResponse(Constants.RequestResponse.NO_CONNECTION);
         } catch (JSONException e) {
             e.printStackTrace();
             response = new HTTPResponse(Constants.RequestResponse.ERROR);

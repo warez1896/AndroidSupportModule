@@ -2,5 +2,6 @@
 <resources>
     <color name="bg">@color/black</color>
     <color name="text_std">@color/white</color>
-    <color name="text_box_bg">@color/gray</color>
+    <color name="gray">#bbb</color>
+    <color name="grayer">#999</color>
 </resources>

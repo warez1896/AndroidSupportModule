@@ -4,6 +4,7 @@
     <string name="toast_unknown_failure">Something\'s wrong. Please see logs</string>
     <string name="toast_empty_server_response">The response from server is empty</string>
     <string name="toast_server_connection_failure">Unable to connect to server</string>
+    <string name="toast_server_connection_timeout">Connection timed-out</string>
     <string name="toast_invalid_login">Invalid login</string>
 
     <string name="txt_unauthorized">This device is not authorized to use this application. Please contact the administrator for assistance.</string>
