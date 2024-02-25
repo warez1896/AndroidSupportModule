@@ -12,9 +12,9 @@ public class ChronoSyncPairing {
     private final Date serverTimestamp;
     private final BigDecimal cpuUptime;
 
-    public ChronoSyncPairing(@NonNull Date serverTimestamp, @NonNull BigDecimal cpuUptime) {
+    public ChronoSyncPairing(@NonNull Date serverTimestamp, long cpuUptime) {
         this.serverTimestamp = serverTimestamp;
-        this.cpuUptime = cpuUptime;
+        this.cpuUptime = BigDecimal.valueOf(cpuUptime);
     }
 
     public Calendar getServerTime() {
