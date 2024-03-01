@@ -32,6 +32,13 @@ public class PrefsManager {
         editor.apply();
     }
 
+    public static void remove(Context context, String masterKey, String key){
+        SharedPreferences sp = context.getSharedPreferences(masterKey, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.remove(key);
+        editor.apply();
+    }
+
     public static String getString(Context context, String masterKey, String key) {
         SharedPreferences sp = context.getSharedPreferences(masterKey, Context.MODE_PRIVATE);
         return sp.getString(key, "");
